@@ -1,0 +1,40 @@
+#root {
+  padding: 10px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+table, th, tr, td {
+  border: 1px solid;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  row-gap: 10px;
+  margin-top: 10px;
+}
+
+input {
+  padding: 5px;
+}
+
+.add-form {
+  padding: 10px;
+  background: #ffc638;
+  border: 2px dotted #a90c0c;
+  font-size: 16px;
+  font-weight: 600;
+}
+
