@@ -7,13 +7,14 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      showForm: true,
-
-    };
-    
+      contacts: [
+        { id: 1, nameuser: 'Oleg', surname: 'vddhv', tel: '54545' },
+        { id: 2, nameuser: 'Ihor', surname: 'gegtg', tel: '44568' },
+        { id: 3, nameuser: 'Vania', surname: 'hthrt', tel: '4686' },
+      ],
+      showForm: false,
+    }
   }
-
-
 
   handlertoggleForm = (e) => {
     this.setState(state => ({
@@ -21,20 +22,29 @@ export default class App extends Component {
     }))
   }
 
-  handlerCancel = (e) => {
-    this.setState(state => ({
-      showForm: !state.showForm
-    }))
-  }
-  
-
   addContact = (nameuser, surname, tel) => {
-    
     this.setState({
+      contacts: [...this.state.contacts, {id: new Date().getTime(), nameuser, surname, tel}]
+    })
+    this.handlertoggleForm();
+  }
 
+  deleteItem = (e) => {
+    e.stopPropagation();
+    let id = +e.target.id;
+    const updateContact = this.state.contacts.filter((item) => item.id !== id);
+    console.log(updateContact);
+    this.setState({
+      contacts: updateContact
     })
   }
 
+  cancel = (e) => {
+    this.setState({
+      contacts: this.state.contacts
+    })
+    this.handlertoggleForm();
+  }
 
   render() {
     return (
@@ -48,9 +58,7 @@ export default class App extends Component {
           <button className='add-form' form={this.state.showForm} onClick={this.handlertoggleForm} >
             Add new contact
           </button>
-
-          {this.state.showForm ?  <Form handlerCancel={this.handlerCancel} /> : '' }
-         
+          {this.state.showForm ?  <Form addсontact={this.addContact} cancel={this.cancel}/> : undefined }
         </div>
       </div>
     )

@@ -6,14 +6,11 @@ export default class Form extends Component {
     this.state = {
       nameuser: '',
       surname: '', 
-      tel: ''
+      tel: '', 
     }
-
   }
 
   changeHandler = (e) => {
-    console.log(e.target.name);
-    console.log(e);
     this.setState({
       [e.target.name]: e.target.value,
     })
@@ -21,16 +18,23 @@ export default class Form extends Component {
 
   submitHandler = (e) => {
     e.preventDefault();
-    console.log(e.target);
-    let person = {
+    this.props.addсontact(this.state.nameuser, this.state.surname, this.state.tel)
+    this.setState({
+      nameuser: '',
+      surname: '', 
+      tel: ''
+    })
+    
+  }
 
-    }
-
+  cancel = (e) => {
+    e.preventDefault();
+    this.props.cancel()
   }
   
   render() {
     return (
-      <form className='form' 
+      <form className='form-users' 
       onSubmit={this.submitHandler}
       >
             <input 
@@ -54,8 +58,8 @@ export default class Form extends Component {
               onChange={this.changeHandler} 
               value={this.state.tel} 
               key={3} />
-            <button key={4} type="submit" >Save contact</button>
-            <button key={5} type="submit" handlerCancel={this.props.handlerCancel} >Cancel</button>
+            <button key={4} type="submit" className='btn'>Save contact</button>
+            <button key={5} onClick={this.cancel} className='btn'>Cancel</button>
       </form>
     )
   }
